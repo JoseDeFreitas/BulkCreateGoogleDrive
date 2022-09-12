@@ -23,8 +23,8 @@ how it works.
 
 ### Requirements
 
-The program connects to the Google OAuth, so you need to do some things before running the program.
-Right next you can see the list of things you need to do. Every element redirects you to the Google
+The program connects to the Google Cloud, so you need to do some things before running the program.
+Right next you can see the list of steps you need to do. Every element redirects you to the Google
 pages that explain everything clearly, including extra information that you may want to know.
 
 1. [Create a Google Cloud project](https://developers.google.com/workspace/guides/create-project).
