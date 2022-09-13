@@ -54,6 +54,18 @@ test application, with the Google Drive API enabled (so the program can manage y
 files), and with created OAuth credentials (that the program uses to access to your account).
 
 To run the program, unzip the .rar file. You'll see a folder that has the executable file of the
-program, alongside the README.md file. Remember the "credentials.json" file you downloaded earlier?
-Well, you need to paste that file into the program's folder, at the top root (where the executable
-file lies). **Don't forget to rename the credentials file to "credentials.json".**
+program, alongside other files. Remember the "credentials.json" file you downloaded earlier? Well,
+you need to paste that file into the program's folder, at the top root (where the executable file
+lies). **Don't forget to rename the credentials file to "credentials.json".**
+
+In the program folder you'll also see a file named "options.json". You have to edit this file to
+make the program know what folder do you want your files in, which Google Sheet template to use,
+what kind of information do you want from the files, etc. Change the values according to what
+you want; properties make it clear what's all about. Here's an example:
+
+```json
+{
+    "template": "Template Sheet",
+    "folder": "Files from template" 
+}
+```
