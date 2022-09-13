@@ -42,7 +42,8 @@ recommend you read related documents from Google docs to know what you're doing.
     ".../auth/drive.metadata.readonly".
 4. [Create your OAuth client ID credentials](https://developers.google.com/workspace/guides/create-credentials#oauth-client-id)
     - In step 4, select "Desktop app" instead of "Web application".
-    - Just after step 5, click on "Download JSON".
+    - Just after step 5, click on "Download JSON". Change the name of the downloaded file to
+    "credentials.json".
     - Skip step 6.
 5. Run the program.
 
