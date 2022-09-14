@@ -44,7 +44,7 @@ doing.
 4. [Create your OAuth client ID credentials](https://developers.google.com/workspace/guides/create-credentials#oauth-client-id)
     - In step 4, select "Desktop app" instead of "Web application".
     - Just after step 5, click on "Download JSON". Change the name of the downloaded file to
-    "credentials.json".
+    `credentials.json`.
     - Skip step 6.
 
 ### Execution
@@ -54,11 +54,11 @@ test application, with the Google Drive API enabled (so the program can manage y
 files), and with created OAuth credentials (that the program uses to access to your account).
 
 To run the program, unzip the .rar file. You'll see a folder that has the executable file of the
-program, alongside other files. Remember the "credentials.json" file you downloaded earlier? Well,
+program, alongside other files. Remember the `credentials.json` file you downloaded earlier? Well,
 you need to paste that file into the program's folder, at the top root (where the executable file
-lies). **Don't forget to rename the credentials file to "credentials.json".**
+lies). **Don't forget to rename the credentials file to `credentials.json`.**
 
-In the program folder you'll also see a file named "options.json". You have to edit this file to
+In the program folder you'll also see a file named `options.txt`. You have to edit this file to
 make the program know what folder do you want your files in, which Google Sheet template to use,
 what kind of information do you want from the files, etc. Change the values according to what
 you want; properties make it clear what's all about. Here's an example:
