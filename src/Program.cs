@@ -13,7 +13,11 @@ namespace DriveQuickstart
 {
     class Program
     {
-        static string[] Scopes = { DriveService.Scope.Drive };
+        static string[] Scopes = {
+            DriveService.Scope.Drive,
+            DriveService.Scope.DriveAppdata,
+            DriveService.Scope.DriveFile,
+        };
         static string ApplicationName = "ManageFilesFromGoogleSheet";
 
         static void Main(string[] args)
@@ -66,7 +70,7 @@ namespace DriveQuickstart
                     credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
                         GoogleClientSecrets.FromStream(stream).Secrets,
                         Scopes,
-                        "user",
+                        "admin",
                         CancellationToken.None,
                         new FileDataStore(credPath, true)).Result;
                     Console.WriteLine($"Credential file saved to: {credPath}");
