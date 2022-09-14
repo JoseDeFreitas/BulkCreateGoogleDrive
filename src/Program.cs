@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Diagnostics;
+using System.ComponentModel;
 
 namespace DriveQuickstart
 {
@@ -34,8 +35,22 @@ namespace DriveQuickstart
                     return;
                 }
                 else if (decision == "n")
-                    Process.Start(@"\options.json");
+                {
+                    try
+                    {
+                        Process.Start("notepad.exe", "options.txt");
+                    }
+                    catch (Win32Exception e)
+                    {
+                        Console.WriteLine(e);
+                    }
+                    catch (FileNotFoundException e)
+                    {
+                        Console.WriteLine(e);
+                    }
+
                     return;
+                }
             }
         }
 
