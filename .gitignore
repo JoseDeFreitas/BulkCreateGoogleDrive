@@ -3,3 +3,4 @@ bin
 .vscode
 credentials.json
 token.json
+options.txt
