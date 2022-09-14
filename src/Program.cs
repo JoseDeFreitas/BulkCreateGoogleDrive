@@ -13,7 +13,7 @@ namespace DriveQuickstart
 {
     class Program
     {
-        static string[] Scopes = { DriveService.Scope.DriveReadonly };
+        static string[] Scopes = { DriveService.Scope.Drive };
         static string ApplicationName = "ManageFilesFromGoogleSheet";
 
         static void Main(string[] args)
@@ -78,29 +78,27 @@ namespace DriveQuickstart
                     ApplicationName = ApplicationName
                 });
 
-                FilesResource.ListRequest listRequest = service.Files.List();
-                listRequest.PageSize = 10;
-                listRequest.Fields = "nextPageToken, files(id, name)";
-
-                IList<Google.Apis.Drive.v3.Data.File> files = listRequest.Execute()
-                    .Files;
-                Console.WriteLine("Files:");
-
-                if (files == null || files.Count == 0)
-                {
-                    Console.WriteLine("No files found.");
-                    return;
-                }
-
-                foreach (var file in files)
-                {
-                    Console.WriteLine($"{file.Name} ({file.Id})");
-                }
+                CreateFolder(service);
             }
             catch (FileNotFoundException e)
             {
                 Console.WriteLine(e.Message);
             }
+        }
+
+        static void CreateFolder(DriveService service)
+        {
+            var fileMetadata = new Google.Apis.Drive.v3.Data.File()
+            {
+                Name = "Test",
+                MimeType = "application/vnd.google-apps.folder"
+            };
+
+            var request = service.Files.Create(fileMetadata);
+            request.Fields = "id";
+            var file = request.Execute();
+
+            Console.WriteLine("Folder ID: " + file.Id);
         }
     }
 }
