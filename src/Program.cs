@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
+using System.Diagnostics;
 
 namespace DriveQuickstart
 {
@@ -19,8 +20,23 @@ namespace DriveQuickstart
             Console.WriteLine("══════════════════════════");
             Console.WriteLine("ManageFilesFromGoogleSheet");
             Console.WriteLine("══════════════════════════");
+            
+            var decision = "";
 
-            //ConnectToGoogle();
+            while ((decision != "y") || (decision != "n"))
+            {
+                Console.Write("Are these settings correct? (y/n): ");
+                decision = Console.ReadLine();
+
+                if (decision == "y")
+                {
+                    ConnectToGoogle();
+                    return;
+                }
+                else if (decision == "n")
+                    Process.Start(@"\options.json");
+                    return;
+            }
         }
 
         static void ConnectToGoogle()
@@ -29,8 +45,7 @@ namespace DriveQuickstart
             {
                 UserCredential credential;
 
-                using (var stream =
-                       new FileStream("credentials.json", FileMode.Open, FileAccess.Read))
+                using (var stream = new FileStream("credentials.json", FileMode.Open, FileAccess.Read))
                 {
                     string credPath = "token.json";
                     credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
