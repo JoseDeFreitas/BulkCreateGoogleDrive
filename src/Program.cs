@@ -19,47 +19,21 @@ namespace DriveQuickstart
             DriveService.Scope.DriveFile,
         };
         static string ApplicationName = "ManageFilesFromGoogleSheet";
+        static string FolderName = "";
+        static string TemplateSheet = "";
 
         static void Main(string[] args)
         {
             Console.WriteLine("══════════════════════════");
             Console.WriteLine("ManageFilesFromGoogleSheet");
-            Console.WriteLine("══════════════════════════");
-            
-            var decision = "";
+            Console.WriteLine("══════════════════════════\n");
 
-            while ((decision != "y") || (decision != "n"))
-            {
-                Console.Write("Are these settings correct? (y/n): ");
-                decision = Console.ReadLine();
+            Console.Write("Input the name of the folder you want (won't be created if already exists): ");
+            string? FolderName = Console.ReadLine();
+            Console.WriteLine("\n");
+            Console.Write("Input the name of the template sheet (won't be created if already exists): ");
+            string? TemplateSheet = Console.ReadLine();
 
-                if (decision == "y")
-                {
-                    ConnectToGoogle();
-                    return;
-                }
-                else if (decision == "n")
-                {
-                    try
-                    {
-                        Process.Start("notepad.exe", "options.txt");
-                    }
-                    catch (Win32Exception e)
-                    {
-                        Console.WriteLine(e);
-                    }
-                    catch (FileNotFoundException e)
-                    {
-                        Console.WriteLine(e);
-                    }
-
-                    return;
-                }
-            }
-        }
-
-        static void ConnectToGoogle()
-        {
             try
             {
                 UserCredential credential;
@@ -88,13 +62,15 @@ namespace DriveQuickstart
             {
                 Console.WriteLine(e.Message);
             }
+
+            return;
         }
 
         static void CreateFolder(DriveService service)
         {
             var fileMetadata = new Google.Apis.Drive.v3.Data.File()
             {
-                Name = "Test",
+                Name = FolderName,
                 MimeType = "application/vnd.google-apps.folder"
             };
 
