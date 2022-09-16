@@ -58,14 +58,17 @@ program, alongside other files. Remember the `credentials.json` file you downloa
 you need to paste that file into the program's folder, at the top root (where the executable file
 lies). **Don't forget to rename the credentials file to `credentials.json`.**
 
-In the program folder you'll also see a file named `options.txt`. You have to edit this file to
-make the program know what folder do you want your files in, which Google Sheet template to use,
-what kind of information do you want from the files, etc. Change the values according to what
-you want; properties make it clear what's all about. Here's an example:
+After you've moved the file into the folder, run the executable. You'll be prompted with a text
+that asks you to choose one of the three options, which are:
 
-```json
-{
-    "template": "Template Sheet",
-    "folder": "Files from template" 
-}
-```
+1. **Set a new folder/template registry.** You'll choose this the first time you run the program and
+every time you want to create another binding, no matter if you reuse one of the two inputs or
+you create a new folder and template file.
+2. **Update a folder/template registry.** You'll choose this every time you just want to update the
+folder and the Google Sheet file.
+3. **Delete a folder/template registry or all registry.** The name says it all. There's also an option
+to delete every registry.
+
+**Note:** a "folder/template registry" is simple a pair of a folder and a Google Sheet file. This
+is saved in a list of registries so you don't have to input the name of the folder and the name of
+the template file every time you want to update the information.
