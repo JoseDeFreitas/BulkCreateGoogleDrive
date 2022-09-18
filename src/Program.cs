@@ -8,14 +8,12 @@ using System.IO;
 using System.Threading;
 using System.Diagnostics;
 using System.ComponentModel;
+using Microsoft.Win32;
 
 namespace DriveQuickstart
 {
     class Program
     {
-        static string FolderName = "";
-        static string TemplateSheet = "";
-
         static void Main(string[] args)
         {
             Console.WriteLine("══════════════════════════");
@@ -26,7 +24,6 @@ namespace DriveQuickstart
             Console.WriteLine("(1) Create a new folder/template registry.");
             Console.WriteLine("(2) Update a folder/template registry.");
             Console.WriteLine("(3) Delete the data of the application.\n");
-
             Console.Write("Your option: ");
 
             byte decision = 0;
@@ -52,8 +49,8 @@ namespace DriveQuickstart
 
                     Console.Write("Input the name of the folder: ");
                     string? folderName = Console.ReadLine();
-                    string? templateName = Console.ReadLine();
                     Console.Write("Input the name of the template file: ");
+                    string? templateName = Console.ReadLine();
 
                     RegistryStorage.SaveToRegistry(folderName!, templateName!);
 
@@ -67,11 +64,11 @@ namespace DriveQuickstart
                     Console.WriteLine("Delete the data of the application.");
                     Console.WriteLine("All the data from the app will be deleted from the Windows registry.");
                     Console.Write("Are you sure? (y/n): ");
-                    string? deleteOrNot = Console.ReadLine();
+                    char deleteOrNot = Convert.ToChar(Console.Read());
 
-                    if (deleteOrNot == "y")
+                    if (Char.ToUpper(deleteOrNot) == 'Y')
                         RegistryStorage.DeleteAppData();
-                    else if (deleteOrNot == "n")
+                    else
                         break;
 
                     break;
@@ -143,17 +140,24 @@ namespace DriveQuickstart
     {
         public static void SaveToRegistry(string folderName, string templateName)
         {
-
+            RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\ManageFilesFromGoogleSheet");
+            key.SetValue(folderName, templateName);
+            key.Close();
         }
         
-        public static void ReadFromRegistry()
+        public static string[] ReadFromRegistry()
         {
-
+            return;
+        }
+        public static string ReadFromRegistry(string registryPair)
+        {
+            RegistryKey key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\ManageFilesFromGoogleSheet");
+            return key.GetValue(registryPair).ToString();
         }
 
         public static void DeleteAppData()
         {
-
+            Registry.CurrentUser.DeleteSubKeyTree(@"SOFTWARE\ManageFilesFromGoogleSheet");
         }
     }
 }
