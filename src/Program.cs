@@ -59,6 +59,16 @@ namespace DriveQuickstart
 
                     break;
                 case 2:
+                    Console.WriteLine("This is the list of the registries created:");
+
+                    string[] registries = RegistryStorage.ReadFromRegistry();
+
+                    int counter = 1;
+                    foreach (string key in registries)
+                    {
+                        Console.WriteLine($"{counter}- {key}");
+                    }
+
                     break;
                 case 3:
                     Console.WriteLine("Delete the data of the application.");
@@ -147,7 +157,8 @@ namespace DriveQuickstart
         
         public static string[] ReadFromRegistry()
         {
-            return;
+            RegistryKey key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\ManageFilesFromGoogleSheet");
+            return key.GetSubKeyNames();
         }
         public static string ReadFromRegistry(string registryPair)
         {
