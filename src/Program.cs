@@ -78,8 +78,6 @@ namespace ManageFilesFromGoogleSheet
 
                     if (Char.ToUpper(deleteOrNot) == 'Y')
                         RegistryStorage.DeleteAppData();
-                    else
-                        break;
 
                     break;
                 default:
