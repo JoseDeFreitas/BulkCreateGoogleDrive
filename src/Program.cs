@@ -132,14 +132,14 @@ namespace ManageFilesFromGoogleSheet
 
         public static void CreateFolderAndTemplate(string folderName, string templateName)
         {
-            var fileMetadata = new Google.Apis.Drive.v3.Data.File()
+            var folderMetadata = new Google.Apis.Drive.v3.Data.File()
             {
                 Name = folderName,
                 MimeType = "application/vnd.google-apps.folder"
             };
 
-            var request = Service!.Files.Create(fileMetadata);
-            request.Execute();
+            var request = Service!.Files.Create(folderMetadata);
+            var folderId = request.Execute();
         }
     }
 
