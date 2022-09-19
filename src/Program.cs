@@ -55,7 +55,7 @@ namespace ManageFilesFromGoogleSheet
                     RegistryStorage.SaveToRegistry(folderName!, templateName!);
 
                     DriveManagement.ConnectToGoogle();
-                    DriveManagement.CreateFolder(folderName!);
+                    DriveManagement.CreateFolderAndTemplate(folderName!, templateName!);
 
                     break;
                 case 2:
@@ -130,7 +130,7 @@ namespace ManageFilesFromGoogleSheet
             }
         }
 
-        public static void CreateFolder(string folderName)
+        public static void CreateFolderAndTemplate(string folderName, string templateName)
         {
             var fileMetadata = new Google.Apis.Drive.v3.Data.File()
             {
@@ -139,10 +139,7 @@ namespace ManageFilesFromGoogleSheet
             };
 
             var request = Service!.Files.Create(fileMetadata);
-            request.Fields = "id";
-            var file = request.Execute();
-
-            Console.WriteLine("Folder ID: " + file.Id);
+            request.Execute();
         }
     }
 
@@ -157,13 +154,13 @@ namespace ManageFilesFromGoogleSheet
         
         public static string[] ReadFromRegistry()
         {
-            RegistryKey key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\ManageFilesFromGoogleSheet");
+            RegistryKey key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\ManageFilesFromGoogleSheet")!;
             return key.GetSubKeyNames();
         }
         public static string ReadFromRegistry(string registryPair)
         {
-            RegistryKey key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\ManageFilesFromGoogleSheet");
-            return key.GetValue(registryPair).ToString();
+            RegistryKey key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\ManageFilesFromGoogleSheet")!;
+            return key.GetValue(registryPair)!.ToString()!;
         }
 
         public static void DeleteAppData()
