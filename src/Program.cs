@@ -10,7 +10,7 @@ using System.Diagnostics;
 using System.ComponentModel;
 using Microsoft.Win32;
 
-namespace DriveQuickstart
+namespace ManageFilesFromGoogleSheet
 {
     class Program
     {
