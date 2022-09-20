@@ -154,6 +154,17 @@ namespace ManageFilesFromGoogleSheet
 
             var request = Service!.Files.Create(folderMetadata);
             var folderId = request.Execute();
+
+            var templateMetadata = new Google.Apis.Drive.v3.Data.File()
+            {
+                Name = $"{templateName}.xlsx",
+                Parents = new List<string>
+                {
+                    folderId.Id
+                }
+            };
+
+            Service.Files.Create(templateMetadata).Execute();
         }
     }
 
