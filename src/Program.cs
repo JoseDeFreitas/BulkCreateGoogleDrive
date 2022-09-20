@@ -96,6 +96,10 @@ namespace ManageFilesFromGoogleSheet
         }
     }
 
+    /// <summary>
+    /// Class that contains the methods that make possible the connection with Google Drive,
+    /// and that create and update the files.
+    /// </summary>
     public class DriveManagement
     {
         static string[] Scopes = {
@@ -148,6 +152,10 @@ namespace ManageFilesFromGoogleSheet
         }
     }
 
+    /// <summary>
+    /// Class that contains the methods that interact with the Windows Registry, saving,
+    /// retrieving and deleting key/value pairs.
+    /// </summary>
     public class RegistryStorage
     {
         public static void SaveToRegistry(string folderName, string templateName)
