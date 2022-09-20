@@ -33,12 +33,18 @@ namespace ManageFilesFromGoogleSheet
             }
             catch (FormatException e)
             {
-                Console.WriteLine(e);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"Only numbers are allowed.\n\n{e}");
+                Console.ResetColor();
+
                 return;
             }
             catch (OverflowException e)
             {
-                Console.WriteLine(e);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"Only numbers from 1 to 3 are accepted.\n\n{e}");
+                Console.ResetColor();
+
                 return;
             }
 
