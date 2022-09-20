@@ -67,6 +67,7 @@ namespace ManageFilesFromGoogleSheet
                     foreach (string key in registries)
                     {
                         Console.WriteLine($"{counter}- {key}");
+                        counter++;
                     }
 
                     break;
@@ -77,7 +78,7 @@ namespace ManageFilesFromGoogleSheet
                     char deleteOrNot = Convert.ToChar(Console.Read());
 
                     if (Char.ToUpper(deleteOrNot) == 'Y')
-                        RegistryStorage.DeleteAppData();
+                        RegistryStorage.DeleteAppData(); 
 
                     break;
                 default:
@@ -153,7 +154,7 @@ namespace ManageFilesFromGoogleSheet
         public static string[] ReadFromRegistry()
         {
             RegistryKey key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\ManageFilesFromGoogleSheet")!;
-            return key.GetSubKeyNames();
+            return key.GetValueNames();
         }
         public static string ReadFromRegistry(string registryPair)
         {
