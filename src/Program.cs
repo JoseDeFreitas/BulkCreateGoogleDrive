@@ -25,8 +25,8 @@ namespace ManageFilesFromGoogleSheet
             Console.WriteLine("(2) Update a folder/template registry.");
             Console.WriteLine("(3) Delete the data of the application.\n");
             Console.Write("Your option: ");
-
             byte decision = 0;
+
             try
             {
                 decision = Convert.ToByte(Console.ReadLine());
@@ -84,11 +84,16 @@ namespace ManageFilesFromGoogleSheet
                     char deleteOrNot = Convert.ToChar(Console.Read());
 
                     if (Char.ToUpper(deleteOrNot) == 'Y')
-                        RegistryStorage.DeleteAppData(); 
+                        RegistryStorage.DeleteAppData();
+                    else
+                        Console.WriteLine("No data was deleted.");
 
                     break;
                 default:
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Only \"1\", \"2\", and \"3\" are valid options.");
+                    Console.ResetColor();
+
                     break;
             }
 
