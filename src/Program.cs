@@ -219,6 +219,17 @@ namespace ManageFilesFromGoogleSheet
 
             Service.Files.Create(templateMetadata).Execute();
         }
+
+        /// <summary>
+        /// Update both the folder (creating or deleting files from the folder) and
+        /// the Google Sheet file, taking information from it to update the folder and
+        /// changing rows and columns in the file according to the information
+        /// retrieved from the files of the folder.
+        /// </summary>
+        public static void UpdateFolderAndTemplate()
+        {
+
+        }
     }
 
     /// <summary>
