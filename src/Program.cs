@@ -12,6 +12,7 @@ using Microsoft.Win32;
 
 namespace ManageFilesFromGoogleSheet
 {
+    [System.Runtime.Versioning.SupportedOSPlatform("windows")]
     class Program
     {
         static void Main(string[] args)
@@ -172,6 +173,7 @@ namespace ManageFilesFromGoogleSheet
     /// Class that contains the methods that interact with the Windows Registry, saving,
     /// retrieving and deleting key/value pairs.
     /// </summary>
+    [System.Runtime.Versioning.SupportedOSPlatform("windows")]
     public class RegistryStorage
     {
         public static void SaveToRegistry(string folderName, string templateName)
