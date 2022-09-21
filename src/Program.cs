@@ -184,7 +184,9 @@ namespace ManageFilesFromGoogleSheet
             }
             catch (FileNotFoundException e)
             {
-                Console.WriteLine(e.Message);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"The credentials file was not found.\n\n{e}");
+                Console.ResetColor();
             }
         }
 
