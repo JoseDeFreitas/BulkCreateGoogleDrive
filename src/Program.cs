@@ -26,6 +26,18 @@ namespace ManageFilesFromGoogleSheet
             PrintMenu();
         }
 
+        /// <summary>
+        /// Prints the menu of the application, which includes the 4 options available.
+        /// Also, it calls the methods responsible for executing each command, both
+        /// regarding the Google Drive API and the Windows Registry.
+        /// </summary>
+        /// <exception cref="FormatException">
+        /// If the user enters a character that is not a number.
+        /// </exception>
+        /// <exception cref="OverflowException">
+        /// If the user enters a number that is beyond the maximum or minimum value of
+        /// the <c>byte</c> data type.
+        /// </exception>
         static void PrintMenu()
         {
             Console.WriteLine("Choose the option you want:");
@@ -139,6 +151,14 @@ namespace ManageFilesFromGoogleSheet
         static string ApplicationName = "ManageFilesFromGoogleSheet";
         static DriveService? Service;
 
+        /// <summary>
+        /// Reads the user's credentials from the <c>credentials.json</c> file they
+        /// should have included in the root folder, where the executable file of the
+        /// program lies.
+        /// </summary>
+        /// <exception cref="FileNotFoundException">
+        /// If the file containing the user's credentials couldn't be found.
+        /// </exception>
         public static void ConnectToGoogle()
         {
             try
@@ -168,6 +188,10 @@ namespace ManageFilesFromGoogleSheet
             }
         }
 
+        /// <summary>
+        /// Create the folder and the template on the user's Google Drive account
+        /// based on the names provided.
+        /// </summary>
         public static void CreateFolderAndTemplate(string folderName, string templateName)
         {
             var folderMetadata = new Google.Apis.Drive.v3.Data.File()
@@ -199,6 +223,13 @@ namespace ManageFilesFromGoogleSheet
     [System.Runtime.Versioning.SupportedOSPlatform("windows")]
     public class RegistryStorage
     {
+        /// <summary>
+        /// Saves the information of the folder/template pair into the Windows Registry,
+        /// so the user doesn't need to provide the information again but only select the
+        /// number corresponding to the pair they want to update.
+        /// </summary>
+        /// <param name="folderName">Name of the folder to contain all the Google files.</param>
+        /// <param name="templateName">Name of the Google Sheet file to use as a template.</param>
         public static void SaveToRegistry(string folderName, string templateName)
         {
             RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\ManageFilesFromGoogleSheet");
@@ -206,17 +237,37 @@ namespace ManageFilesFromGoogleSheet
             key.Close();
         }
         
+        /// <summary>
+        /// Retrieves to other methods all of the folder names so the user can select
+        /// which one they want to update.
+        /// </summary>
+        /// <returns>
+        /// An array of strings with all the folder/template pairs.
+        /// </returns>
         public static string[] ReadFromRegistry()
         {
             RegistryKey key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\ManageFilesFromGoogleSheet")!;
             return key.GetValueNames();
         }
+
+        /// <summary>
+        /// Retrieves to other methods the value of the specified key.
+        /// </summary>
+        /// <param name="registryPair">Name of the folder/template pair to retrieve.</param>
+        /// <returns>
+        /// The value of the specified key.
+        /// </returns>
         public static string ReadFromRegistry(string registryPair)
         {
             RegistryKey key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\ManageFilesFromGoogleSheet")!;
             return key.GetValue(registryPair)!.ToString()!;
         }
 
+        /// <summary>
+        /// Deletes all the information from the <c>SOFTWARE\ManageFilesFromGoogleSheet</c>
+        /// directory inside the HKEY_CURRENT_USER from the Windows registry. It deletes the
+        //whole folder.
+        /// </summary>
         public static void DeleteAppData()
         {
             Registry.CurrentUser.DeleteSubKeyTree(@"SOFTWARE\ManageFilesFromGoogleSheet");
