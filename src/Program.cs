@@ -75,7 +75,7 @@ namespace ManageFilesFromGoogleSheet
             catch (OverflowException e)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"Only numbers from 1 to 3 are accepted.\n\n{e}");
+                Console.WriteLine($"Only numbers from 1 to 4 are accepted.\n\n{e}");
                 Console.ResetColor();
 
                 Environment.Exit(1);
