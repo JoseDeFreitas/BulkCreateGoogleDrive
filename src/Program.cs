@@ -141,6 +141,9 @@ namespace ManageFilesFromGoogleSheet
     /// Class that contains the methods that make possible the connection with Google Drive,
     /// and that create and update the files.
     /// </summary>
+    /// <typeparam name="Scopes">Array of string containing the scopes the program should use.</typeparam>
+    /// <typeparam name="ApplicationName">The name of the program.</typeparam>
+    /// <typeparam name="Service">The Google Service instance to connect to reference Google.</typeparam>
     public class DriveManagement
     {
         static string[] Scopes = {
