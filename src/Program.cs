@@ -17,14 +17,34 @@ namespace ManageFilesFromGoogleSheet
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("══════════════════════════");
-            Console.WriteLine("ManageFilesFromGoogleSheet");
-            Console.WriteLine("══════════════════════════\n");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("╔════════════════════════════╗");
+            Console.WriteLine("║ ManageFilesFromGoogleSheet ║");
+            Console.WriteLine("╚════════════════════════════╝\n");
+            Console.ResetColor();
 
+            PrintMenu();
+        }
+
+        static void PrintMenu()
+        {
             Console.WriteLine("Choose the option you want:");
-            Console.WriteLine("(1) Create a new folder/template registry.");
-            Console.WriteLine("(2) Update a folder/template registry.");
-            Console.WriteLine("(3) Delete the data of the application.\n");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("(1) ");
+            Console.ResetColor();
+            Console.WriteLine("Create a new folder/template registry.");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("(2) ");
+            Console.ResetColor();
+            Console.WriteLine("Update a folder/template registry.");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("(3) ");
+            Console.ResetColor();
+            Console.WriteLine("Delete the data of the application.");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("(4) ");
+            Console.ResetColor();
+            Console.WriteLine("Exit the application.\n");
             Console.Write("Your option: ");
             byte decision = 0;
 
@@ -38,7 +58,7 @@ namespace ManageFilesFromGoogleSheet
                 Console.WriteLine($"Only numbers are allowed.\n\n{e}");
                 Console.ResetColor();
 
-                return;
+                Environment.Exit(1);
             }
             catch (OverflowException e)
             {
@@ -46,7 +66,7 @@ namespace ManageFilesFromGoogleSheet
                 Console.WriteLine($"Only numbers from 1 to 3 are accepted.\n\n{e}");
                 Console.ResetColor();
 
-                return;
+                Environment.Exit(1);
             }
 
             switch (decision)
@@ -79,26 +99,29 @@ namespace ManageFilesFromGoogleSheet
 
                     break;
                 case 3:
-                    Console.WriteLine("Delete the data of the application.");
                     Console.WriteLine("All the data from the app will be deleted from the Windows registry.");
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.Write("Are you sure? (y/n): ");
+                    Console.ResetColor();
                     char deleteOrNot = Convert.ToChar(Console.Read());
 
                     if (Char.ToUpper(deleteOrNot) == 'Y')
+                    {
                         RegistryStorage.DeleteAppData();
+                        Console.WriteLine("All the data was deleted.");
+                    }
                     else
                         Console.WriteLine("No data was deleted.");
 
                     break;
+                case 4:
+                    break;
                 default:
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Only \"1\", \"2\", and \"3\" are valid options.");
+                    Console.WriteLine("Only \"1\", \"2\", \"3\" and \"4\" are valid options.");
                     Console.ResetColor();
-
                     break;
             }
-
-            return;
         }
     }
 
