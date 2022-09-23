@@ -20,6 +20,9 @@ namespace ManageFilesFromGoogleSheet
             Console.WriteLine("╚════════════════════════════╝\n");
             Console.ResetColor();
 
+            RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\ManageFilesFromGoogleSheet");
+            key.Close();
+
             PrintMenu();
         }
 
@@ -87,7 +90,7 @@ namespace ManageFilesFromGoogleSheet
                     string? folderName = Console.ReadLine();
 
                     RegistryKey key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\ManageFilesFromGoogleSheet")!;
-                    if (!key.GetValueNames().Contains(folderName))
+                    if (key.GetValueNames().Contains(folderName))
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("The name of the folder already exists.");
