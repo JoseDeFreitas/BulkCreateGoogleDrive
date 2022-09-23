@@ -14,7 +14,7 @@ namespace ManageFilesFromGoogleSheet
     {
         static void Main(string[] args)
         {
-            Console.ForegroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("╔════════════════════════════╗");
             Console.WriteLine("║ ManageFilesFromGoogleSheet ║");
             Console.WriteLine("╚════════════════════════════╝");
