@@ -220,11 +220,12 @@ namespace ManageFilesFromGoogleSheet
 
             var templateMetadata = new Google.Apis.Drive.v3.Data.File()
             {
-                Name = $"{templateName}.xlsx",
+                Name = $"{templateName}",
                 Parents = new List<string>
                 {
                     folderId.Id
-                }
+                },
+                MimeType = "application/vnd.google-apps.spreadsheet"
             };
 
             Service.Files.Create(templateMetadata).Execute();
