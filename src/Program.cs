@@ -38,7 +38,7 @@ namespace ManageFilesFromGoogleSheet
         /// If the user enters a number that is beyond the maximum or minimum value of
         /// the <c>byte</c> data type.
         /// </exception>
-        static void PrintMenu()
+        public static void PrintMenu()
         {
             Console.WriteLine("Choose the option you want:");
             Console.ForegroundColor = ConsoleColor.Blue;
@@ -209,26 +209,41 @@ namespace ManageFilesFromGoogleSheet
         /// </summary>
         public static void CreateFolderAndTemplate(string folderName, string templateName)
         {
-            var folderMetadata = new Google.Apis.Drive.v3.Data.File()
+            try
             {
-                Name = folderName,
-                MimeType = "application/vnd.google-apps.folder"
-            };
-
-            var request = Service!.Files.Create(folderMetadata);
-            var folderId = request.Execute();
-
-            var templateMetadata = new Google.Apis.Drive.v3.Data.File()
-            {
-                Name = $"{templateName}",
-                Parents = new List<string>
+                var folderMetadata = new Google.Apis.Drive.v3.Data.File()
                 {
-                    folderId.Id
-                },
-                MimeType = "application/vnd.google-apps.spreadsheet"
-            };
+                    Name = folderName,
+                    MimeType = "application/vnd.google-apps.folder"
+                };
 
-            Service.Files.Create(templateMetadata).Execute();
+                var request = Service!.Files.Create(folderMetadata);
+                var folderId = request.Execute();
+
+                var templateMetadata = new Google.Apis.Drive.v3.Data.File()
+                {
+                    Name = $"{templateName}",
+                    Parents = new List<string>
+                    {
+                        folderId.Id
+                    },
+                    MimeType = "application/vnd.google-apps.spreadsheet"
+                };
+
+                Service.Files.Create(templateMetadata).Execute();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+
+                Environment.Exit(1);
+            }
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("The folder and the Google Sheet file were created successfully.");
+            Console.ResetColor();
+
+            Program.PrintMenu();
         }
 
         /// <summary>
