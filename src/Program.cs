@@ -88,6 +88,16 @@ namespace ManageFilesFromGoogleSheet
 
                     Console.Write("Input the name of the folder: ");
                     string? folderName = Console.ReadLine();
+
+                    RegistryKey key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\ManageFilesFromGoogleSheet")!;
+                    if (!key.GetValueNames().Contains(folderName))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("The name of the folder already exists.");
+                        Console.ResetColor();
+                        break;
+                    }
+
                     Console.Write("Input the name of the template file: ");
                     string? templateName = Console.ReadLine();
 
@@ -103,9 +113,9 @@ namespace ManageFilesFromGoogleSheet
                     string[] registries = RegistryStorage.ReadFromRegistry();
 
                     int counter = 1;
-                    foreach (string key in registries)
+                    foreach (string keyName in registries)
                     {
-                        Console.WriteLine($"{counter}- {key}");
+                        Console.WriteLine($"{counter}- {keyName}");
                         counter++;
                     }
 
