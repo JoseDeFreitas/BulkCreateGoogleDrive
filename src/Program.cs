@@ -17,7 +17,7 @@ namespace ManageFilesFromGoogleSheet
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("╔════════════════════════════╗");
             Console.WriteLine("║ ManageFilesFromGoogleSheet ║");
-            Console.WriteLine("╚════════════════════════════╝\n");
+            Console.WriteLine("╚════════════════════════════╝");
             Console.ResetColor();
 
             RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\ManageFilesFromGoogleSheet");
@@ -40,7 +40,7 @@ namespace ManageFilesFromGoogleSheet
         /// </exception>
         public static void PrintMenu()
         {
-            Console.WriteLine("Choose the option you want:");
+            Console.WriteLine("\nChoose the option you want:");
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.Write("(1) ");
             Console.ResetColor();
