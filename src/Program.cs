@@ -200,6 +200,8 @@ namespace ManageFilesFromGoogleSheet
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"The \"credentials\" file was not found.\n\n{e}");
                 Console.ResetColor();
+
+                Environment.Exit(1);
             }
         }
 
