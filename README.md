@@ -39,8 +39,8 @@ doing.
 2. [Enable Google Workspace APIs](https://developers.google.com/workspace/guides/enable-apis).
     - In step 3, search for "Google Drive API".
 3. [Configure the OAuth consent screen](https://developers.google.com/workspace/guides/configure-oauth-consent#configure_oauth_consent_register_your_app).
-    - In step 5, add the scopes ".../auth/docs", ".../auth/drive", ".../auth/drive.metadata", and
-    ".../auth/drive.metadata.readonly".
+    - In step 5, add the scopes ".../auth/docs", ".../auth/drive", ".../auth/drive.metadata",
+    ".../auth/drive.metadata.readonly", and ".../auth/drive.readonly".
 4. [Create your OAuth client ID credentials](https://developers.google.com/workspace/guides/create-credentials#oauth-client-id)
     - In step 4, select "Desktop app" instead of "Web application".
     - Just after step 5, click on "Download JSON". Change the name of the downloaded file to
