@@ -5,9 +5,6 @@ using Google.Apis.Util.Store;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading;
-using System.Diagnostics;
-using System.ComponentModel;
 using Microsoft.Win32;
 
 namespace ManageFilesFromGoogleSheet
