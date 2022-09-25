@@ -5,9 +5,8 @@ using Google.Apis.Util.Store;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Microsoft.Win32;
 
-namespace ManageFilesFromGoogleSheet
+namespace BulkEditGoogleDrive
 {
     [System.Runtime.Versioning.SupportedOSPlatform("windows")]
     class Program
@@ -15,135 +14,10 @@ namespace ManageFilesFromGoogleSheet
         static void Main(string[] args)
         {
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("╔════════════════════════════╗");
-            Console.WriteLine("║ ManageFilesFromGoogleSheet ║");
-            Console.WriteLine("╚════════════════════════════╝");
+            Console.WriteLine("╔═════════════════════╗");
+            Console.WriteLine("║ BulkEditGoogleDrive ║");
+            Console.WriteLine("╚═════════════════════╝");
             Console.ResetColor();
-
-            RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\ManageFilesFromGoogleSheet");
-            key.Close();
-
-            PrintMenu();
-        }
-
-        /// <summary>
-        /// Prints the menu of the application, which includes the 4 options available.
-        /// Also, it calls the methods responsible for executing each command, both
-        /// regarding the Google Drive API and the Windows Registry.
-        /// </summary>
-        /// <exception cref="FormatException">
-        /// If the user enters a character that is not a number.
-        /// </exception>
-        /// <exception cref="OverflowException">
-        /// If the user enters a number that is beyond the maximum or minimum value of
-        /// the <c>byte</c> data type.
-        /// </exception>
-        public static void PrintMenu()
-        {
-            Console.WriteLine("\nChoose the option you want:");
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.Write("(1) ");
-            Console.ResetColor();
-            Console.WriteLine("Create a new folder/template registry.");
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.Write("(2) ");
-            Console.ResetColor();
-            Console.WriteLine("Update a folder/template registry.");
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.Write("(3) ");
-            Console.ResetColor();
-            Console.WriteLine("Delete the data of the application.");
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.Write("(4) ");
-            Console.ResetColor();
-            Console.WriteLine("Exit the application.\n");
-            Console.Write("Your option: ");
-            byte decision = 0;
-
-            try
-            {
-                decision = Convert.ToByte(Console.ReadLine());
-            }
-            catch (FormatException e)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"Only numbers are allowed.\n\n{e}");
-                Console.ResetColor();
-
-                Environment.Exit(1);
-            }
-            catch (OverflowException e)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"Only numbers from 1 to 4 are accepted.\n\n{e}");
-                Console.ResetColor();
-
-                Environment.Exit(1);
-            }
-
-            switch (decision)
-            {
-                case 1:
-                    Console.WriteLine("Create a new folder/template registry.");
-
-                    Console.Write("Input the name of the folder: ");
-                    string? folderName = Console.ReadLine();
-
-                    RegistryKey key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\ManageFilesFromGoogleSheet")!;
-                    if (key.GetValueNames().Contains(folderName))
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("The name of the folder already exists.");
-                        Console.ResetColor();
-                        break;
-                    }
-
-                    Console.Write("Input the name of the template file: ");
-                    string? templateName = Console.ReadLine();
-
-                    RegistryStorage.SaveToRegistry(folderName!, templateName!);
-
-                    DriveManagement.ConnectToGoogle();
-                    DriveManagement.CreateFolderAndTemplate(folderName!, templateName!);
-
-                    break;
-                case 2:
-                    Console.WriteLine("This is the list of the registries created:");
-
-                    string[] registries = RegistryStorage.ReadFromRegistry();
-
-                    int counter = 1;
-                    foreach (string keyName in registries)
-                    {
-                        Console.WriteLine($"{counter}- {keyName}");
-                        counter++;
-                    }
-
-                    break;
-                case 3:
-                    Console.WriteLine("All the data from the app will be deleted from the Windows registry.");
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.Write("Are you sure? (y/n): ");
-                    Console.ResetColor();
-                    char deleteOrNot = Convert.ToChar(Console.Read());
-
-                    if (Char.ToUpper(deleteOrNot) == 'Y')
-                    {
-                        RegistryStorage.DeleteAppData();
-                        Console.WriteLine("All the data was deleted.");
-                    }
-                    else
-                        Console.WriteLine("No data was deleted.");
-
-                    break;
-                case 4:
-                    break;
-                default:
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Only \"1\", \"2\", \"3\" and \"4\" are valid options.");
-                    Console.ResetColor();
-                    break;
-            }
         }
     }
 
@@ -161,7 +35,7 @@ namespace ManageFilesFromGoogleSheet
             DriveService.Scope.DriveAppdata,
             DriveService.Scope.DriveFile,
         };
-        static string ApplicationName = "ManageFilesFromGoogleSheet";
+        static string ApplicationName = "BulkEditGoogleDrive";
         static DriveService? Service;
 
         /// <summary>
@@ -244,77 +118,6 @@ namespace ManageFilesFromGoogleSheet
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("The folder and the Google Sheet file were created successfully.");
             Console.ResetColor();
-
-            Program.PrintMenu();
-        }
-
-        /// <summary>
-        /// Update both the folder (creating or deleting files from the folder) and
-        /// the Google Sheet file, taking information from it to update the folder and
-        /// changing rows and columns in the file according to the information
-        /// retrieved from the files of the folder.
-        /// </summary>
-        public static void UpdateFolderAndTemplate()
-        {
-
-        }
-    }
-
-    /// <summary>
-    /// Class that contains the methods that interact with the Windows Registry, saving,
-    /// retrieving and deleting key/value pairs.
-    /// </summary>
-    [System.Runtime.Versioning.SupportedOSPlatform("windows")]
-    public class RegistryStorage
-    {
-        /// <summary>
-        /// Saves the information of the folder/template pair into the Windows Registry,
-        /// so the user doesn't need to provide the information again but only select the
-        /// number corresponding to the pair they want to update.
-        /// </summary>
-        /// <param name="folderName">Name of the folder to contain all the Google files.</param>
-        /// <param name="templateName">Name of the Google Sheet file to use as a template.</param>
-        public static void SaveToRegistry(string folderName, string templateName)
-        {
-            RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\ManageFilesFromGoogleSheet");
-            key.SetValue(folderName, templateName);
-            key.Close();
-        }
-        
-        /// <summary>
-        /// Retrieves to other methods all of the folder names so the user can select
-        /// which one they want to update.
-        /// </summary>
-        /// <returns>
-        /// An array of strings with all the folder/template pairs.
-        /// </returns>
-        public static string[] ReadFromRegistry()
-        {
-            RegistryKey key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\ManageFilesFromGoogleSheet")!;
-            return key.GetValueNames();
-        }
-
-        /// <summary>
-        /// Retrieves to other methods the value of the specified key.
-        /// </summary>
-        /// <param name="registryPair">Name of the folder/template pair to retrieve.</param>
-        /// <returns>
-        /// The value of the specified key.
-        /// </returns>
-        public static string ReadFromRegistry(string registryPair)
-        {
-            RegistryKey key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\ManageFilesFromGoogleSheet")!;
-            return key.GetValue(registryPair)!.ToString()!;
-        }
-
-        /// <summary>
-        /// Deletes all the information from the <c>SOFTWARE\ManageFilesFromGoogleSheet</c>
-        /// directory inside the HKEY_CURRENT_USER from the Windows registry. It deletes the
-        //whole folder.
-        /// </summary>
-        public static void DeleteAppData()
-        {
-            Registry.CurrentUser.DeleteSubKeyTree(@"SOFTWARE\ManageFilesFromGoogleSheet");
         }
     }
 }
