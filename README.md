@@ -1,4 +1,4 @@
-# ManageFilesFromGoogleSheet
+# BulkEditGoogleDrive
 
 Google Drive is one of the most used cloud services, for many reasons. Google Drive allows you
 to create folders and add files in them. I've encountered the situation where I had so much
