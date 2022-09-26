@@ -9,7 +9,6 @@ using System.Threading;
 
 namespace BulkEditGoogleDrive
 {
-    [System.Runtime.Versioning.SupportedOSPlatform("windows")]
     class Program
     {
         static void Main(string[] args)
