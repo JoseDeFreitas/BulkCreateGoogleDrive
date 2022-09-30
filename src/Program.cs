@@ -12,9 +12,6 @@ namespace BulkEditGoogleDrive
     /// <typeparam name="Scopes">Array of string containing the scopes the program should use.</typeparam>
     /// <typeparam name="ApplicationName">The name of the program.</typeparam>
     /// <typeparam name="Service">The Google Service instance to connect to reference Google.</typeparam>
-    /// <exception cref="FileNotFoundException">
-    /// If the file containing the user's credentials couldn't be found.
-    /// </exception>
     class Program
     {
         static string[] Scopes = {
