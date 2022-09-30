@@ -12,6 +12,9 @@ namespace BulkEditGoogleDrive
     /// <typeparam name="Scopes">Array of string containing the scopes the program should use.</typeparam>
     /// <typeparam name="ApplicationName">The name of the program.</typeparam>
     /// <typeparam name="Service">The Google Service instance to connect to reference Google.</typeparam>
+    /// <exception cref="FileNotFoundException">
+    /// If the file containing the user's credentials couldn't be found.
+    /// </exception>
     class Program
     {
         static string[] Scopes = {
@@ -29,18 +32,20 @@ namespace BulkEditGoogleDrive
             Console.WriteLine("║ BulkEditGoogleDrive ║");
             Console.WriteLine("╚═════════════════════╝");
             Console.ResetColor();
-        }
 
-        /// <summary>
-        /// Reads the user's credentials from the <c>credentials.json</c> file they
-        /// should have included in the root folder, where the executable file of the
-        /// program lies.
-        /// </summary>
-        /// <exception cref="FileNotFoundException">
-        /// If the file containing the user's credentials couldn't be found.
-        /// </exception>
-        public static void ConnectToGoogle()
-        {
+            Console.WriteLine(
+                "\nFill the \"files.txt\" file with the names and the extensions of the"
+                + "files you want to create. Use the first line to specify the name of the"
+                + "folder and the other lines to specify the names and the extensions of"
+                + "the files."
+            );
+
+            Console.Write("Press any key to continue.");
+            Console.ReadLine();
+
+            // Read data from the "files.txt" file
+
+            // Connect to Google Drive
             try
             {
                 UserCredential credential;
@@ -70,6 +75,8 @@ namespace BulkEditGoogleDrive
 
                 Environment.Exit(1);
             }
+
+            // Create files in Google Drive
         }
 
         /// <summary>
