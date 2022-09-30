@@ -47,11 +47,17 @@ namespace BulkEditGoogleDrive
             }
             catch (FileNotFoundException)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("The file \"files.txt\" was not found.");
+                Console.ResetColor();
+                Environment.Exit(1);
             }
             catch (IOException)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("An IO error ocurred when opening the file.");
+                Console.ResetColor();
+                Environment.Exit(1);
             }
 
             // Connect to Google Drive
@@ -81,7 +87,6 @@ namespace BulkEditGoogleDrive
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"The \"credentials.json\" file was not found.");
                 Console.ResetColor();
-
                 Environment.Exit(1);
             }
 
