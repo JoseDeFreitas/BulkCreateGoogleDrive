@@ -62,10 +62,10 @@ namespace BulkEditGoogleDrive
                     ApplicationName = ApplicationName
                 });
             }
-            catch (FileNotFoundException e)
+            catch (FileNotFoundException)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"The \"credentials.json\" file was not found.\n\n{e}");
+                Console.WriteLine($"The \"credentials.json\" file was not found.");
                 Console.ResetColor();
 
                 Environment.Exit(1);
