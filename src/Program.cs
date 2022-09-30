@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
+using System.Diagnostics;
 
 namespace BulkEditGoogleDrive
 {
@@ -19,14 +20,13 @@ namespace BulkEditGoogleDrive
             DriveService.Scope.DriveAppdata,
             DriveService.Scope.DriveFile,
         };
-        static string ApplicationName = "BulkEditGoogleDrive";
         static DriveService? Service;
 
         static void Main(string[] args)
         {
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("╔═════════════════════╗");
-            Console.WriteLine($"║ {ApplicationName} ║");
+            Console.WriteLine("║ BulkEditGoogleDrive ║");
             Console.WriteLine("╚═════════════════════╝");
             Console.ResetColor();
 
@@ -37,13 +37,32 @@ namespace BulkEditGoogleDrive
                 + "the files."
             );
 
-            Console.Write("Press any key to continue.");
-            Console.ReadLine();
+            Console.Write("Do you want to update the information of the file? (y/n): ");
 
-            // Read data from the "files.txt" file
+            char decision = 'n';
             try
             {
-                string[] fileNames = System.IO.File.ReadAllLines("files.txt");
+                decision = Convert.ToChar(Console.ReadLine());
+            }
+            catch (Exception)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("The answer should be \"y\" or \"n\".");
+                Console.ResetColor();
+                Environment.Exit(1);
+            }
+
+            if (decision == 'y')
+            {
+                Process.Start("notepad.exe", "files.txt");
+                Environment.Exit(0);
+            }
+
+            // Read data from the "files.txt" file
+            string[] fileNames = {};
+            try
+            {
+                fileNames = System.IO.File.ReadAllLines("files.txt");
             }
             catch (FileNotFoundException)
             {
@@ -79,7 +98,7 @@ namespace BulkEditGoogleDrive
                 Service = new DriveService(new BaseClientService.Initializer
                 {
                     HttpClientInitializer = credential,
-                    ApplicationName = ApplicationName
+                    ApplicationName = "BulkEditGoogleDrive"
                 });
             }
             catch (FileNotFoundException)
