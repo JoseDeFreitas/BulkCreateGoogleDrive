@@ -20,7 +20,12 @@ namespace BulkEditGoogleDrive
             DriveService.Scope.DriveAppdata,
             DriveService.Scope.DriveFile,
         };
-        static DriveService? Service;
+        static DriveService Service;
+        static Dictionary<string, string> Extensions = new Dictionary<string, string>()
+        {
+            {"gdo", "application/vnd.google-apps.document"}, {"gsh", "application/vnd.google-apps.spreadsheet"},
+            {"gsl", "application/vnd.google-apps.presentation"}, {"gfo", "application/vnd.google-apps.form"}
+        };
 
         static void Main(string[] args)
         {
@@ -110,35 +115,45 @@ namespace BulkEditGoogleDrive
             }
 
             // Create files in Google Drive
+            int fileCount = 0;
             try
             {
                 var folderMetadata = new Google.Apis.Drive.v3.Data.File()
                 {
-                    Name = "Name",
+                    Name = fileNames[0],
                     MimeType = "application/vnd.google-apps.folder"
                 };
 
-                var request = Service!.Files.Create(folderMetadata);
+                var request = Service.Files.Create(folderMetadata);
                 var folderId = request.Execute();
 
-                var templateMetadata = new Google.Apis.Drive.v3.Data.File()
+                for (int i = 1; i < fileNames.Length; i++)
                 {
-                    Name = "Name",
-                    Parents = new List<string>
+                    var fileMetadata = new Google.Apis.Drive.v3.Data.File()
                     {
-                        folderId.Id
-                    },
-                    MimeType = "application/vnd.google-apps.spreadsheet"
-                };
+                        Name = fileNames[i].Split('.')[0],
+                        Parents = new List<string>
+                        {
+                            folderId.Id
+                        },
+                        MimeType = Extensions[fileNames[i].Split('.')[1]]
+                    };
 
-                Service.Files.Create(templateMetadata).Execute();
+                    Service.Files.Create(fileMetadata).Execute();
+                    fileCount++;
+                }
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Console.WriteLine(e);
-
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("The folder or the files couldn't be created.");
+                Console.ResetColor();
                 Environment.Exit(1);
             }
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"{fileCount} files were created successfully.");
+            Console.ResetColor();
         }
     }
 }
