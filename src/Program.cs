@@ -29,7 +29,7 @@ namespace BulkEditGoogleDrive
         {
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("╔═════════════════════╗");
-            Console.WriteLine("║ BulkEditGoogleDrive ║");
+            Console.WriteLine($"║ {ApplicationName} ║");
             Console.WriteLine("╚═════════════════════╝");
             Console.ResetColor();
 
@@ -44,6 +44,18 @@ namespace BulkEditGoogleDrive
             Console.ReadLine();
 
             // Read data from the "files.txt" file
+            try
+            {
+                string[] fileNames = System.IO.File.ReadAllLines("files.txt");
+            }
+            catch (FileNotFoundException)
+            {
+                Console.WriteLine("The file \"files.txt\" was not found.");
+            }
+            catch (IOException)
+            {
+                Console.WriteLine("An IO error ocurred when opening the file.");
+            }
 
             // Connect to Google Drive
             try
@@ -77,19 +89,11 @@ namespace BulkEditGoogleDrive
             }
 
             // Create files in Google Drive
-        }
-
-        /// <summary>
-        /// Create the folder and the template on the user's Google Drive account
-        /// based on the names provided.
-        /// </summary>
-        public static void CreateFolderAndTemplate(string folderName, string templateName)
-        {
             try
             {
                 var folderMetadata = new Google.Apis.Drive.v3.Data.File()
                 {
-                    Name = folderName,
+                    Name = "Name",
                     MimeType = "application/vnd.google-apps.folder"
                 };
 
@@ -98,7 +102,7 @@ namespace BulkEditGoogleDrive
 
                 var templateMetadata = new Google.Apis.Drive.v3.Data.File()
                 {
-                    Name = $"{templateName}",
+                    Name = "Name",
                     Parents = new List<string>
                     {
                         folderId.Id
@@ -114,10 +118,6 @@ namespace BulkEditGoogleDrive
 
                 Environment.Exit(1);
             }
-
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("The folder and the Google Sheet file were created successfully.");
-            Console.ResetColor();
         }
     }
 }
