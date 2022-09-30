@@ -9,26 +9,10 @@ using System.Threading;
 
 namespace BulkEditGoogleDrive
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("╔═════════════════════╗");
-            Console.WriteLine("║ BulkEditGoogleDrive ║");
-            Console.WriteLine("╚═════════════════════╝");
-            Console.ResetColor();
-        }
-    }
-
-    /// <summary>
-    /// Class that contains the methods that make possible the connection with Google Drive,
-    /// and that create and update the files.
-    /// </summary>
     /// <typeparam name="Scopes">Array of string containing the scopes the program should use.</typeparam>
     /// <typeparam name="ApplicationName">The name of the program.</typeparam>
     /// <typeparam name="Service">The Google Service instance to connect to reference Google.</typeparam>
-    public class DriveManagement
+    class Program
     {
         static string[] Scopes = {
             DriveService.Scope.Drive,
@@ -37,6 +21,15 @@ namespace BulkEditGoogleDrive
         };
         static string ApplicationName = "BulkEditGoogleDrive";
         static DriveService? Service;
+
+        static void Main(string[] args)
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("╔═════════════════════╗");
+            Console.WriteLine("║ BulkEditGoogleDrive ║");
+            Console.WriteLine("╚═════════════════════╝");
+            Console.ResetColor();
+        }
 
         /// <summary>
         /// Reads the user's credentials from the <c>credentials.json</c> file they
