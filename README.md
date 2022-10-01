@@ -1,21 +1,9 @@
 # BulkEditGoogleDrive
 
-Google Drive is one of the most used cloud services, for many reasons. Google Drive allows you
-to create folders and add files in them. I've encountered the situation where I had so much
-unorganised files that, when I wanted to change something in one file, I had to change the
-subsequent ones to make them match the new change.
-
-With this little program, you can create a Google Sheet file to use it as a template for how
-do you want a specific folder to behave. Imagine the case you need to have many Google Docs files,
-and instead of using an external app or addon you want to work only within Google Drive. Well, you
-can just create a Google Sheet file and write all the files you want to create, alongside other
-information, like the labels you want to put to them, if you want them to be starred or to show
-you specific information, like how many words there are per Google Docs file.
-
-In the end, you'll have a single Google Sheet file were all the information of the files of a
-specific folder will be organised and ready to update the files and retrieve information from
-the other folder. It may not sound very clear, so see the following example video to know
-how it works.
+Creating multiple files at once in Google Drive is awful, because you have to do it manually.
+With this simple and small program you can create, rename and delete files in your Google Drive
+storage, no matter what the type of the file is. You can either create a new folder for the files
+or input the name of an already created folder to update its children files.
 
 ## Example
 
@@ -25,15 +13,14 @@ how it works.
 
 The program connects to the Google Cloud, so you need to do some things before running the program.
 Instead of creating a global Google Cloud application, you create your own application (adding the
-needed API and creating the OAuth credentials), so you're the owner and maintainer of it but just
-run the program I created. This is so I don't have to register a new application, as this project
-is very small. Also, you have full control over the requests, and if you know C# you can change
-whatever you want.
+needed API and creating the OAuth credentials), so you're the owner and maintainer of it. This is
+so I don't have to register a new application, as this project is very small. Also, you have full
+control over the requests, and if you know C# you can change whatever you want.
 
 Right next you can see the list of steps you need to do before running the program. Every element
 redirects you to the Google pages that explain everything clearly, including extra information that
-you may want to know. I recommend you read related documents from Google docs to know what you're
-doing.
+you may want to know. I recommend you read related documents from the Google documentation to know
+what you're doing.
 
 1. [Create a Google Cloud project](https://developers.google.com/workspace/guides/create-project).
 2. [Enable Google Workspace APIs](https://developers.google.com/workspace/guides/enable-apis).
@@ -54,21 +41,6 @@ test application, with the Google Drive API enabled (so the program can manage y
 files), and with created OAuth credentials (that the program uses to access to your account).
 
 To run the program, unzip the .rar file. You'll see a folder that has the executable file of the
-program, alongside other files. Remember the `credentials.json` file you downloaded earlier? Well,
+program, alongside other files. Remember the .json file you downloaded earlier? Well,
 you need to paste that file into the program's folder, at the top root (where the executable file
 lies). **Don't forget to rename the credentials file to `credentials.json`.**
-
-After you've moved the file into the folder, run the executable. You'll be prompted with a text
-that asks you to choose one of the three options, which are:
-
-1. **Set a new folder/template registry.** You'll choose this the first time you run the program and
-every time you want to create another binding, no matter if you reuse one of the two inputs or
-you create a new folder and template file.
-2. **Update a folder/template registry.** You'll choose this every time you just want to update the
-folder and the Google Sheet file.
-3. **Delete a folder/template registry or all registry.** The name says it all. There's also an option
-to delete every registry.
-
-**Note:** a "folder/template registry" is simple a pair of a folder and a Google Sheet file. This
-is saved in a list of registries so you don't have to input the name of the folder and the name of
-the template file every time you want to update the information.
