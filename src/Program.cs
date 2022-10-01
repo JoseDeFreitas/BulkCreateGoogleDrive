@@ -36,10 +36,7 @@ namespace BulkEditGoogleDrive
             Console.ResetColor();
 
             Console.WriteLine(
-                "\nFill the \"files.txt\" file with the names and the extensions of the"
-                + "files you want to create. Use the first line to specify the name of the"
-                + "folder and the other lines to specify the names and the extensions of"
-                + "the files. To know how to format the file, read the description in"
+                "To know how to format the file, read the description in "
                 + "https://github.com/JoseDeFreitas/BulkEditGoogleDrive."
             );
 
