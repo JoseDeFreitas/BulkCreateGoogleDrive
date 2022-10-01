@@ -50,12 +50,15 @@ namespace BulkEditGoogleDrive
             {
                 decision = Convert.ToChar(Console.ReadLine());
             }
-            catch (Exception)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("The answer should be \"y\" or \"n\".");
-                Console.ResetColor();
-                Environment.Exit(1);
+            catch (Exception e)            
+            {                
+                if (e is ArgumentNullException || e is FormatException)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("The answer should be \"y\" or \"n\".");
+                    Console.ResetColor();
+                    Environment.Exit(1);
+                }
             }
 
             if (decision == 'y')
