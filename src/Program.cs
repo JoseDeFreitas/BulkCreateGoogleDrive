@@ -147,18 +147,32 @@ namespace BulkEditGoogleDrive
             }
 
             // Create files in Google Drive
-            int fileCount = 0;
+            int createdFilesCount = 0;
+            int skippedFilesCount = 0;
             try
             {
-                var folderMetadata = new Google.Apis.Drive.v3.Data.File()
+                // Check if folder already exists
+                string folderId = "";
+
+                var folderRequest = Service.Files.List();
+                folderRequest.Q = $"name='{folderName}' and mimeType='application/vnd.google-apps.folder'";
+                var folderResult = folderRequest.Execute();
+
+                if (folderResult.Files.Count == 0)
                 {
-                    Name = folderName,
-                    MimeType = "application/vnd.google-apps.folder"
-                };
+                    var folderMetadata = new Google.Apis.Drive.v3.Data.File()
+                    {
+                        Name = folderName,
+                        MimeType = "application/vnd.google-apps.folder"
+                    };
 
-                var request = Service.Files.Create(folderMetadata);
-                var folderId = request.Execute();
+                    var request = Service.Files.Create(folderMetadata).Execute();
+                    folderId = request.Id;
+                }
+                else
+                    folderId = folderResult.Files[0].Id;
 
+                // Create files inside folder
                 for (int i = 1; i < fileNames.Length; i++)
                 {
                     string fileName = "";
@@ -190,18 +204,28 @@ namespace BulkEditGoogleDrive
                         Environment.Exit(1);
                     }
 
-                    var fileMetadata = new Google.Apis.Drive.v3.Data.File()
-                    {
-                        Name = fileName,
-                        Parents = new List<string>
-                        {
-                            folderId.Id
-                        },
-                        MimeType = fileType
-                    };
+                    // Check if file already exists
+                    var fileRequest = Service.Files.List();
+                    fileRequest.Q = $"name='{fileName}' and mimeType='{fileType}'";
+                    var fileResult = fileRequest.Execute();
 
-                    Service.Files.Create(fileMetadata).Execute();
-                    fileCount++;
+                    if (fileResult.Files.Count == 0)
+                    {
+                        var fileMetadata = new Google.Apis.Drive.v3.Data.File()
+                        {
+                            Name = fileName,
+                            Parents = new List<string>
+                            {
+                                folderId
+                            },
+                            MimeType = fileType
+                        };
+
+                        Service.Files.Create(fileMetadata).Execute();
+                        createdFilesCount++;
+                    }
+                    else
+                        skippedFilesCount++;
                 }
             }
             catch (Exception)
@@ -213,7 +237,10 @@ namespace BulkEditGoogleDrive
             }
 
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"{fileCount} files were created successfully.");
+            Console.WriteLine(
+                $"{createdFilesCount} files were created successfully.\n"
+                + $"{skippedFilesCount} files were skipped because they already existed."
+            );
             Console.ResetColor();
         }
     }
