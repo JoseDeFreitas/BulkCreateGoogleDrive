@@ -81,4 +81,16 @@ If you want to add support for more file types, change the dictionary in the
 of the [Program.cs](src/Program.cs) file adding a file extension that corresponds to the name of
 the type of the file. Refer to the [available MIME Types](https://developers.google.com/drive/api/guides/mime-types).
 
-## Issues
+## Remarks
+
+There are some things you should have in mind when running the program:
+
+- When it finds a file with the same name and type, it won't be created. The same happens with
+folders. You can indeed have folders and files from the same type with the same name, but I
+implemented this exception to make sure files are not duplicated unnecessary when you want to
+update a folder instead of creating a new one. This is the reason why this rule is propagated to
+folders, as you wouldn't be able to update a folder that already exists.
+- If you delete a folder but keep it inside the Google Drive bin, the program will detect that the
+folder already exists. To bypass this behaviour, make sure to empty the bin. If you don't pay
+attention to this, the program will create the files in the deleted folder, and you would be able
+to see them when you restore it; however, the other files will be deleted.
