@@ -69,11 +69,11 @@ Although [Google Drive accepts many file types](https://support.google.com/drive
 has its own types only available within Google. The program accepts only the four default types,
 which are described in the following table:
 
-|File type|Extension keyword|
-|---------|-----------------|
-|Docs     |.gdo             |
-|Sheets   |.gsh             |
-|Slides   |.gsl             |
-|Forms    |.gfo             |
+|File type|Extension|
+|---------|---------|
+|Docs     |.gdo     |
+|Sheets   |.gsh     |
+|Slides   |.gsl     |
+|Forms    |.gfo     |
 
 ## Issues
