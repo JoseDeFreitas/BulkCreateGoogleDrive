@@ -127,7 +127,7 @@ namespace BulkEditGoogleDrive
                 Environment.Exit(1);
             }
 
-            // Create file names
+            // Define names and options
             string folderName = "";
             char numberedNames = 'n';
             try
