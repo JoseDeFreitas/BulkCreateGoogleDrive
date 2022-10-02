@@ -115,13 +115,32 @@ namespace BulkEditGoogleDrive
                 Environment.Exit(1);
             }
 
+            // Create file names
+            string folderName = "";
+            char numberedNames = 'n';
+            try
+            {
+                folderName = fileNames[0].Split('|')[0];
+                numberedNames = Convert.ToChar(fileNames[0].Split('|')[1]);
+            }
+            catch (Exception e)
+            {
+                if (e is ArgumentNullException || e is FormatException || e is ArgumentOutOfRangeException)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("The answer should be \"y\" or \"n\".");
+                    Console.ResetColor();
+                    Environment.Exit(1);
+                }
+            }
+
             // Create files in Google Drive
             int fileCount = 0;
             try
             {
                 var folderMetadata = new Google.Apis.Drive.v3.Data.File()
                 {
-                    Name = fileNames[0],
+                    Name = folderName,
                     MimeType = "application/vnd.google-apps.folder"
                 };
 
@@ -130,14 +149,43 @@ namespace BulkEditGoogleDrive
 
                 for (int i = 1; i < fileNames.Length; i++)
                 {
+                    string fileName = "";
+                    try
+                    {
+                        fileName = fileNames[i].Split('.')[0];
+                    }
+                    catch (ArgumentOutOfRangeException)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("The format of the \"files.txt\" file is wrong.");
+                        Console.ResetColor();
+                        Environment.Exit(1);
+                    }
+
+                    if (numberedNames == 'y')
+                        fileName = $"{i}- {fileName}";
+
+                    string fileType = "";
+                    try
+                    {
+                        fileType = Extensions[fileNames[i].Split('.')[1]];
+                    }
+                    catch (ArgumentOutOfRangeException)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("The format of the \"files.txt\" file is wrong.");
+                        Console.ResetColor();
+                        Environment.Exit(1);
+                    }
+
                     var fileMetadata = new Google.Apis.Drive.v3.Data.File()
                     {
-                        Name = fileNames[i].Split('.')[0],
+                        Name = fileName,
                         Parents = new List<string>
                         {
                             folderId.Id
                         },
-                        MimeType = Extensions[fileNames[i].Split('.')[1]]
+                        MimeType = fileType
                     };
 
                     Service.Files.Create(fileMetadata).Execute();
