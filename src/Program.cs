@@ -16,11 +16,7 @@ namespace BulkEditGoogleDrive
     /// <typeparam name="Service">The Google Service instance to connect to reference Google.</typeparam>
     class Program
     {
-        static string[] Scopes = {
-            DriveService.Scope.Drive,
-            DriveService.Scope.DriveAppdata,
-            DriveService.Scope.DriveFile,
-        };
+        static string[] Scopes = { DriveService.Scope.DriveFile };
         static DriveService Service;
         static Dictionary<string, string> Extensions = new Dictionary<string, string>()
         {
