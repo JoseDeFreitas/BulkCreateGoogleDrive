@@ -1,9 +1,8 @@
 # BulkEditGoogleDrive
 
 Creating multiple files at once in Google Drive is awful, because you have to do it manually.
-With this simple and small program you can create, rename and delete files in your Google Drive
-storage, no matter what the type of the file is. It takes care of already created folders and
-files.
+With this simple and small program you can create and rename files in your Google Drive storage,
+no matter what the type of the file is. It takes care of already created folders and files.
 
 ## Example
 
