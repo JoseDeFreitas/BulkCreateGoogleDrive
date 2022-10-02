@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Diagnostics;
+using System.ComponentModel;
 
 namespace BulkEditGoogleDrive
 {
@@ -60,7 +61,18 @@ namespace BulkEditGoogleDrive
 
             if (decision == 'y')
             {
-                Process.Start("notepad.exe", "files.txt");
+                try
+                {
+                    Process.Start("notepad.exe", "files.txt");
+                }
+                catch (Win32Exception)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("The notepad application could not be found.");
+                    Console.ResetColor();
+                    Environment.Exit(1);
+                }
+                
                 Environment.Exit(0);
             }
 
