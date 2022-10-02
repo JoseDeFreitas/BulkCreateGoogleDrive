@@ -76,4 +76,9 @@ which are described in the following table:
 |Slides   |.gsl     |
 |Forms    |.gfo     |
 
+If you want to add support for more file types, change the dictionary in the
+[line 25](https://github.com/JoseDeFreitas/BulkEditGoogleDrive/blob/8aa76e7b79f06e02b41cb313e222f7f2275d9929/src/Program.cs#L25)
+of the [Program.cs](src/Program.cs) file adding a file extension that corresponds to the name of
+the type of the file. Refer to the [available MIME Types](https://developers.google.com/drive/api/guides/mime-types).
+
 ## Issues
