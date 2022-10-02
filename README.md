@@ -44,7 +44,7 @@ program, alongside other files. Remember the .json file you downloaded earlier? 
 you need to paste that file into the program's folder, at the top root (where the executable file
 lies). **Don't forget to rename the credentials file to `credentials.json`.** When you run the
 program the first time, a folder named `token.json` will be created.
-**Keep that folder inside the main program folder**, it is required
+**Keep that folder inside the main program folder**, it is required.
 
 #### `files.txt` format
 
