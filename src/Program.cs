@@ -11,9 +11,6 @@ using System.ComponentModel;
 
 namespace BulkEditGoogleDrive
 {
-    /// <typeparam name="Scopes">Array of string containing the scopes the program should use.</typeparam>
-    /// <typeparam name="ApplicationName">The name of the program.</typeparam>
-    /// <typeparam name="Service">The Google Service instance to connect to reference Google.</typeparam>
     class Program
     {
         static string[] Scopes = { DriveService.Scope.DriveFile };
