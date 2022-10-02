@@ -42,4 +42,38 @@ files), and with created OAuth credentials (that the program uses to access to y
 To run the program, unzip the .rar file. You'll see a folder that has the executable file of the
 program, alongside other files. Remember the .json file you downloaded earlier? Well,
 you need to paste that file into the program's folder, at the top root (where the executable file
-lies). **Don't forget to rename the credentials file to `credentials.json`.**
+lies). **Don't forget to rename the credentials file to `credentials.json`.** When you run the
+program the first time, a folder named `token.json` will be created.
+**Keep that folder inside the main program folder**, it is required
+
+#### `files.txt` format
+
+After that, fill the file `files.txt` with the correct format. The correct format is this:
+
+```
+FOLDER_NAME|n
+FILE1.EXTENSION
+FILE2.EXTENSION
+```
+
+Replace "`FOLDER_NAME`" with the name of the folder you want to create or select. The letter just
+after the "|" symbol tells the program to number or not to number the files you want to create. If
+you put "`n`", it won't number them; if you put "`y`", it will. This option adds numbers at the
+start of the file names to keep all files organised. Refer to the example video to see how it
+looks. Finally, replace `FILE1` with the name of the file you want and `.EXTENSION` with the type
+of file you want. Add more files in the subsequent lines, like `FILE2.EXTENSION`.
+
+#### Available file extensions
+
+Although [Google Drive accepts many file types](https://support.google.com/drive/answer/37603), it
+has its own types only available within Google. The program accepts only the four default types,
+which are described in the following table:
+
+|File type|Extension keyword|
+|---------|-----------------|
+|Docs     |.gdo             |
+|Sheets   |.gsh             |
+|Slides   |.gsl             |
+|Forms    |.gfo             |
+
+## Issues
