@@ -30,8 +30,8 @@ namespace BulkEditGoogleDrive
             Console.ResetColor();
 
             Console.WriteLine(
-                "To know how to format the file, read the description in "
-                + "https://github.com/JoseDeFreitas/BulkEditGoogleDrive."
+                "To know how to format the file, read the description in the \"README.md\" file."
+                + "Source code: https://github.com/JoseDeFreitas/BulkEditGoogleDrive."
             );
 
             Console.Write("Do you want to update the information of the file? (y/n): ");
