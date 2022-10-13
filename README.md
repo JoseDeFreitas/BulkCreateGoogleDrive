@@ -1,4 +1,6 @@
 # BulkCreateGoogleDrive
+![GitHub all releases](https://img.shields.io/github/downloads/JoseDeFreitas/CodewarsGitHubLogger/total)
+![Supported OS versions](https://img.shields.io/badge/for-Windows%2C%20MacOS%2C%20Linux-blue)
 
 Creating multiple files at once in Google Drive is awful, because you have to do it manually.
 With this simple and small program, you can create files in your Google Drive storage faster,
