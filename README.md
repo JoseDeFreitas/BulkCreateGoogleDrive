@@ -1,4 +1,4 @@
-# BulkEditGoogleDrive
+# BulkCreateGoogleDrive
 
 Creating multiple files at once in Google Drive is awful, because you have to do it manually.
 With this simple and small program, you can create files in your Google Drive storage faster,
