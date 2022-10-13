@@ -9,7 +9,7 @@ using System.Threading;
 using System.Diagnostics;
 using System.ComponentModel;
 
-namespace BulkEditGoogleDrive
+namespace BulkCreateGoogleDrive
 {
     class Program
     {
@@ -24,14 +24,14 @@ namespace BulkEditGoogleDrive
         static void Main(string[] args)
         {
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("╔═════════════════════╗");
-            Console.WriteLine("║ BulkEditGoogleDrive ║");
-            Console.WriteLine("╚═════════════════════╝");
+            Console.WriteLine("╔═══════════════════════╗");
+            Console.WriteLine("║ BulkCreateGoogleDrive ║");
+            Console.WriteLine("╚═══════════════════════╝");
             Console.ResetColor();
 
             Console.WriteLine(
-                "To know how to format the file, read the description in the \"README.md\" file."
-                + "Source code: https://github.com/JoseDeFreitas/BulkEditGoogleDrive."
+                "To know how to format the file, read the description in the \"README.txt\" file."
+                + "Source code: https://github.com/JoseDeFreitas/BulkCreateGoogleDrive."
             );
 
             Console.Write("Do you want to update the information of the file? (y/n): ");
@@ -109,7 +109,7 @@ namespace BulkEditGoogleDrive
                 Service = new DriveService(new BaseClientService.Initializer
                 {
                     HttpClientInitializer = credential,
-                    ApplicationName = "BulkEditGoogleDrive"
+                    ApplicationName = "BulkCreateGoogleDrive"
                 });
             }
             catch (FileNotFoundException)
