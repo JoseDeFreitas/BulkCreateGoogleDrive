@@ -8,6 +8,13 @@ no matter what the type of the file is. It takes care of already created folders
 
 ## Example
 
+https://user-images.githubusercontent.com/37962411/198579898-c6408801-7eb2-492a-8259-7e5a42899098.mp4
+
+- Before the window that says "Google hasn't verified this app", you may see a prompt to choose
+the Google account you want to use.
+- The name of the app, which in the example video is "Test" may vary from the name of the app you
+created in Google Cloud. You can choose any name you want.
+
 ## Usage
 
 ### Requirements
