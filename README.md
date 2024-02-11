@@ -1,4 +1,5 @@
 # BulkCreateGoogleDrive
+
 ![GitHub all releases](https://img.shields.io/github/downloads/JoseDeFreitas/BulkCreateGoogleDrive/total)
 ![Supported OS versions](https://img.shields.io/badge/for-Windows%2C%20MacOS%2C%20Linux-blue)
 
@@ -12,20 +13,20 @@ https://user-images.githubusercontent.com/37962411/198579898-c6408801-7eb2-492a-
 
 - Before the window that says "Google hasn't verified this app", you may see a prompt to choose
 the Google account you want to use.
-- The name of the app, which in the example video is "Test" may vary from the name of the app you
+- The name of the app, which in the example video is "Test", may vary from the name of the app you
 created in Google Cloud. You can choose any name you want.
 
 ## Usage
 
 ### Requirements
 
-The program connects to the Google Cloud, so you need to do some things before running the program.
+The program connects to Google Cloud, so you need to do some things before running the program.
 Instead of creating a global Google Cloud application, you create your own application (adding the
 needed API and creating the OAuth credentials), so you're the owner and maintainer of it. This is
 so I don't have to register a new application, as this project is very small. Also, you have full
 control over the requests, and if you know C# you can change whatever you want.
 
-Right next you can see the list of steps you need to do before running the program. Every element
+Below you can see the list of steps you need to do before running the program. Every element
 redirects you to the Google pages that explain everything clearly, including extra information that
 you may want to know. I recommend you read related documents from the Google documentation to know
 what you're doing.
@@ -45,7 +46,7 @@ what you're doing.
 
 After you've completed all of the steps, you are ready to run the program. You now have a Google
 test application, with the Google Drive API enabled (so the program can manage your Google Drive
-files), and with created OAuth credentials (that the program uses to access to your account).
+files), and with created OAuth credentials (that the program uses to access your account).
 
 To run the program, unzip the .rar file. You'll see a folder that has the executable file of the
 program, alongside other files. Remember the .json file you downloaded earlier? Well,
@@ -86,7 +87,7 @@ which are described in the following table:
 
 If you want to add support for more file types, change the dictionary in the
 [line 25](https://github.com/JoseDeFreitas/BulkEditGoogleDrive/blob/8aa76e7b79f06e02b41cb313e222f7f2275d9929/src/Program.cs#L25)
-of the [Program.cs](src/Program.cs) file adding a file extension that corresponds to the name of
+of the [Program.cs](src/Program.cs) file to add a file extension that corresponds to the name of
 the type of the file. Refer to the [available MIME Types](https://developers.google.com/drive/api/guides/mime-types).
 
 ## Remarks
