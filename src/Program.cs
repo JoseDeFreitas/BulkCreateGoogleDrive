@@ -49,7 +49,6 @@ namespace BulkCreateGoogleDrive
                     Console.WriteLine("The answer should be \"y\" or \"n\".");
                     Console.ResetColor();
                     Console.ReadLine();
-                    Environment.Exit(1);
                 }
             }
 
@@ -65,10 +64,7 @@ namespace BulkCreateGoogleDrive
                     Console.WriteLine("The notepad application could not be found.");
                     Console.ResetColor();
                     Console.ReadLine();
-                    Environment.Exit(1);
                 }
-                
-                Environment.Exit(0);
             }
 
             // Read data from the "files.txt" file
@@ -83,7 +79,6 @@ namespace BulkCreateGoogleDrive
                 Console.WriteLine("The file \"files.txt\" was not found.");
                 Console.ResetColor();
                 Console.ReadLine();
-                Environment.Exit(1);
             }
             catch (IOException)
             {
@@ -91,7 +86,6 @@ namespace BulkCreateGoogleDrive
                 Console.WriteLine("An IO error ocurred when opening the file.");
                 Console.ResetColor();
                 Console.ReadLine();
-                Environment.Exit(1);
             }
 
             // Connect to Google Drive
@@ -122,7 +116,6 @@ namespace BulkCreateGoogleDrive
                 Console.WriteLine($"The \"credentials.json\" file was not found.");
                 Console.ResetColor();
                 Console.ReadLine();
-                Environment.Exit(1);
             }
 
             // Define names and options
@@ -141,7 +134,6 @@ namespace BulkCreateGoogleDrive
                     Console.WriteLine("The answer should be \"y\" or \"n\".");
                     Console.ResetColor();
                     Console.ReadLine();
-                    Environment.Exit(1);
                 }
             }
 
@@ -185,7 +177,6 @@ namespace BulkCreateGoogleDrive
                         Console.WriteLine("The format of the \"files.txt\" file is wrong.");
                         Console.ResetColor();
                         Console.ReadLine();
-                        Environment.Exit(1);
                     }
 
                     if (numberedNames == 'y')
@@ -202,7 +193,6 @@ namespace BulkCreateGoogleDrive
                         Console.WriteLine("The format of the \"files.txt\" file is wrong.");
                         Console.ResetColor();
                         Console.ReadLine();
-                        Environment.Exit(1);
                     }
 
                     // Check if file already exists
@@ -235,7 +225,6 @@ namespace BulkCreateGoogleDrive
                 Console.WriteLine("The folder or the files couldn't be created.");
                 Console.ResetColor();
                 Console.ReadLine();
-                Environment.Exit(1);
             }
 
             Console.ForegroundColor = ConsoleColor.Green;
